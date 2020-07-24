@@ -5,7 +5,7 @@ import 'package:recipe_manager_app/services/recipe_api.dart';
 
 class RecipeProvider with ChangeNotifier {
   List<Recipe> recipeList = new List<Recipe>();
-  RecipeApi _api = new RecipeApi();
+  RecipeApi _api = new RecipeApi("recipe");
   void addRecipe() {
 
     recipeList.add(new Recipe("1", "Big Cookies", "Cookies"));
@@ -24,4 +24,9 @@ class RecipeProvider with ChangeNotifier {
   Stream<QuerySnapshot> fetchRecipeAsStream() {
     return _api.getStreamDataCollection();
   }
+
+  Future<DocumentSnapshot> getDocumentById(String id) {
+    return _api.getDocumentById(id);
+  }
+  
 }

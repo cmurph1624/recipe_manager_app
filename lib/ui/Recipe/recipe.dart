@@ -21,7 +21,7 @@ class _RecipeViewState extends State<RecipeView> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
           onPressed: () {
-
+              Navigator.pushNamed(context, '/recipeitem');
         },
         child: Icon(Icons.add),
       ),
@@ -29,7 +29,14 @@ class _RecipeViewState extends State<RecipeView> {
         title: Center(child: Text('Recipe')),
       ),
       body: Container(
-        child: StreamBuilder(
+        child: Column(children: <Widget>[
+          TextFormField(
+            decoration: new InputDecoration(
+              labelText: "Search",
+              fillColor: Colors.white
+            ),
+          ),
+          Expanded(child: StreamBuilder(
           stream: recipeProvider.fetchRecipeAsStream(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasData) {
@@ -46,6 +53,26 @@ class _RecipeViewState extends State<RecipeView> {
             }
           }
         )
+          
+          )
+        ],)
+        // child: StreamBuilder(
+        //   stream: recipeProvider.fetchRecipeAsStream(),
+        //   builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        //     if (snapshot.hasData) {
+        //       recipes = snapshot.data.documents
+        //       .map((doc) => Recipe.fromMap(doc.data, doc.documentID))
+        //       .toList();
+        //       return ListView.builder(
+        //         itemCount: recipes.length,
+        //         itemBuilder: (buildContext, index) =>
+        //           RecipeCard(recipeDetail: recipes[index])
+        //       );
+        //     } else {
+        //       return Text('fetching');
+        //     }
+        //   }
+        // )
       )
     );
   }

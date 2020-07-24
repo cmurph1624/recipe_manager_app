@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_manager_app/models/recipe.dart';
+import 'package:recipe_manager_app/ui/Recipe/recipeitem.dart';
 
 class RecipeCard extends StatelessWidget {
   final Recipe recipeDetail;
@@ -9,7 +10,9 @@ class RecipeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (_) => RecipeItem(recipe: recipeDetail,)));
+        },
         child: Padding(
             padding: EdgeInsets.all(8),
             child: Card(
